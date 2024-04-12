@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav1">
+    <item
+        android:id="@+id/nav_add_stock"
+        android:icon="@drawable/menu_icon"
+        android:title="@string/add_stock"
+        />
+    <item
+        android:id="@+id/nav_sales"
+        android:icon="@drawable/menu_icon"
+        android:title="@string/sales"/>
+    <item
+        android:id="@+id/nav_purchase"
+        android:icon="@drawable/menu_icon"
+        android:title="@string/purchase"/>
+
+    <item
+        android:id="@+id/nav_search_stock"
+        android:icon="@drawable/menu_icon"
+        android:title="@string/search_stock"/>
+    <item
+        android:id="@+id/list_stock"
+        android:icon="@drawable/menu_icon"
+        android:title="List Stock"/>
+    <item
+        android:id="@+id/nav_log_out"
+        android:icon="@drawable/menu_icon"
+        android:title="Log Out"/>
+</menu>
+
