@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:layout_margin="2dp">
+<TextView
+    android:id="@+id/txtItemCode"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="@string/item_code"
+    android:textColor="@color/white"/>
+<TextView
+    android:id="@+id/txtItemName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="@string/item_name"
+    android:textColor="@color/white"/>
+<TextView
+    android:id="@+id/txtQty"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="@string/qty_in_stock"
+    android:textColor="@color/white"/>
+<TextView
+    android:id="@+id/txtPrice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="@string/price"
+    android:textColor="@color/white"/>
+<TextView
+    android:id="@+id/txtTaxable"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="@string/taxable"
+    android:textColor="@color/white"/>
+</LinearLayout>

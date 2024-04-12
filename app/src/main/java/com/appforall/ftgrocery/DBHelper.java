@@ -145,7 +145,11 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public Boolean addSales(Sales sales) {
-        updateStock(sales.getItemCode(),sales.getQtySold());
+        Stock stock = findStockByItemCode(sales.getItemCode().toString());
+        ContentValues values = new ContentValues();
+        values.put(STOCK_QTY, stock.getQtyStock()-sales.getQtySold());
+        updateStock(stock.getItemCode(), values);
+
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(SALES_ITEM_CODE, sales.getItemCode());
@@ -165,17 +169,41 @@ public class DBHelper extends SQLiteOpenHelper {
         int result = db.update(STOCK_TABLE,values,STOCK_PK_ITEM_CODE+"="+itemCode,null);
         return result>0;
     }
+    private Boolean updateStock(Integer itemCode, ContentValues values) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.update(STOCK_TABLE,values,STOCK_PK_ITEM_CODE+"="+itemCode,null);
+        return result>0;
+    }
+
+    public Boolean addPurchase(Purchase purchase) {
+        Stock stock = findStockByItemCode(purchase.getItemCode().toString());
+        ContentValues values = new ContentValues();
+        values.put(STOCK_QTY, stock.getQtyStock()+ purchase.getQtyPurchased());
+        updateStock(purchase.getItemCode(), values);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(PURCHASE_ITEM_CODE, purchase.getItemCode());
+        cv.put(PURCHASE_DATE, purchase.getDateOfPurchase().getTime());
+        cv.put(PURCHASE_QTY, purchase.getQtyPurchased());
+        long result = db.insert(PURCHASE_TABLE, null, cv);
+        return result > 0;
+    }
 
     /**
-     * Delete Employee from Database Table
+     * Get all Stocks from Database
      *
-     * @param id Employee Id for Employee to be deleted
-     * @return
+     * @return data
      */
-   /* public int DeleteEmployee(int id) {
+    public Cursor getAllStocks() {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "id=" + id, null);
-    }*/
+        Cursor cursor;
+        cursor = db.rawQuery("select * from " + STOCK_TABLE, null);
+        if (cursor.getCount() < 1) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
 
     /**
      * Get all Employees from Database

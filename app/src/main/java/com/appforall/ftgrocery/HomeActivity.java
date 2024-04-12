@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.ListFragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -90,11 +91,11 @@ public class HomeActivity extends AppCompatActivity {
                 }else if (itemId == R.id.nav_sales) {
                     fragment = new SalesFragment();
                 }else if (itemId == R.id.nav_purchase) {
-                   // fragment = ;
+                    fragment = new PurchaseFragment();
                 }else if (itemId == R.id.nav_search_stock) {
                    // fragment = ;
                 }else if (itemId == R.id.nav_list_stock) {
-                   // fragment = ;
+                    fragment = new ListItemsFragment();
                 }else if (itemId == R.id.nav_log_out) {
                    // fragment = ;
                 }

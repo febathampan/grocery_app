@@ -31,4 +31,5 @@
     <string name="date_of_sales">Date of Sales</string>
     <string name="quantity_purchased">Quantity Purchased</string>
     <string name="date_of_purchase">Date of Purchase</string>
+    <string name="list_items">List Items</string>
 </resources>

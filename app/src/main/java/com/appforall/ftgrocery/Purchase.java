@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * Table - Purchase
- * itemCode PK Integer, itemName Text, qtyStock Integer, price Float, taxable Boolean
+ * invoiceNumber PK Integer, itemCode Integer, qtyPurchased Integer, and dateOfPurchase Date
  */
 public class Purchase {
 
@@ -16,8 +16,7 @@ public class Purchase {
     public Purchase() {
     }
 
-    public Purchase(Integer invoiceNumber, Integer itemCode, Integer qtyPurchased, Date dateOfPurchase) {
-        this.invoiceNumber = invoiceNumber;
+    public Purchase(Integer itemCode, Integer qtyPurchased, Date dateOfPurchase) {
         this.itemCode = itemCode;
         this.qtyPurchased = qtyPurchased;
         this.dateOfPurchase = dateOfPurchase;
