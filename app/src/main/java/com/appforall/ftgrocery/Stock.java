@@ -4,6 +4,10 @@ import org.intellij.lang.annotations.Identifier;
 
 import javax.annotation.processing.Generated;
 
+/**
+ * Table - Stock
+ * itemCode PK Integer, itemName Text, qtyStock Integer, price Float, taxable Boolean
+ */
 public class Stock {
     private Integer itemCode;
     private String itemName;

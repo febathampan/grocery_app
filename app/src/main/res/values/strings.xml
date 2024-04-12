@@ -11,4 +11,16 @@
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
     <string name="signup">Sign Up</string>
+    <string name="list_stock">List Stock</string>
+    <string name="log_out">Log Out</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_name">Item Name</string>
+    <string name="qty_in_stock">Qty In Stock</string>
+    <string name="price">Price</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="taxable">Taxable</string>
+    <string name="non_taxable">Non Taxable</string>
+    <string name="is_product_taxable">Is product taxable?</string>
 </resources>

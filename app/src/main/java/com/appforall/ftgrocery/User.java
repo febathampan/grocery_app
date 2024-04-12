@@ -1,5 +1,9 @@
 package com.appforall.ftgrocery;
 
+/**
+ * Table - User
+ * id PK Integer username Text ,emailId Text, password Text
+ */
 public class User {
     private int id;
     private String username;

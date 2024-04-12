@@ -90,6 +90,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
+    /**
+     * Find user with username and password
+     *
+     * @param userName
+     * @param password
+     * @return null if user not found; user entity if user is present
+     */
     public User findUser(String userName, String password){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor;
@@ -105,6 +112,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Add a stock entity to table
+     * @param stock
+     * @return boolean - positive integer means saved, negative integer means failed to save.
+     */
     public Boolean addStock(Stock stock) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();

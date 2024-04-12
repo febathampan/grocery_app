@@ -2,6 +2,10 @@ package com.appforall.ftgrocery;
 
 import java.util.Date;
 
+/**
+ * Table - Purchase
+ * itemCode PK Integer, itemName Text, qtyStock Integer, price Float, taxable Boolean
+ */
 public class Purchase {
 
     private Integer invoiceNumber;

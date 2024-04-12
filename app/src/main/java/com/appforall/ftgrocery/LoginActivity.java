@@ -51,12 +51,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
            else if (v.getId() == loginBinding.btnLogin.getId()) {
             if (validateLogin()) {
-                //intentWelcome = new Intent(this, TestHomeActivity.class);
+
+                //To navigate to Home o successful login
                 intentWelcome = new Intent(this, HomeActivity.class);
                 passDataUsingSharedPreferences();
                 startActivity(intentWelcome);
             } else {
-
 
                 //Using Material Alert Dialog
                 new MaterialAlertDialogBuilder(LoginActivity.this)
@@ -78,6 +78,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Sign up user
+     * If data is incomplete or username exists,
+     * then insertion fails and dialog shows up
+     */
     private void signUpUser() {
         if(!addUser()) {
             new MaterialAlertDialogBuilder(LoginActivity.this)
@@ -114,12 +119,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Add user to database
+     *
+     * @return
+     */
     private boolean addUser() {
         User u = new User(loginBinding.edtUserName.getText().toString().trim(),
                 loginBinding.edtPasswd.getText().toString().trim(), loginBinding.edtEmailid.getText().toString().trim());
         return dbHelper.insertUser(u);
     }
 
+    /**
+     * Validate login
+     * Checks if userName password combination is present in database
+     * @return
+     */
     private boolean validateLogin() {
         user = dbHelper.findUser(loginBinding.edtUserName.getText().toString(), loginBinding.edtPasswd.getText().toString());
         return null != user;

@@ -84,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 int itemId = item.getItemId();
                 if (itemId == R.id.nav_add_stock) {
-                    //fragment = new AddFragment();
+                    fragment = new AddStockFragment();
                 }
                 if (fragment != null) {
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

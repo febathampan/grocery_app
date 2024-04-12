@@ -2,6 +2,10 @@ package com.appforall.ftgrocery;
 
 import java.util.Date;
 
+/**
+ * Table - Sales
+ * orderNumber PK Integer, itemCode Integer, customerName Text, customerEmail Text, qtySold Integer,and dateOfSales Date
+ */
 public class Sales {
     private Integer orderNumber;
     private Integer itemCode;
