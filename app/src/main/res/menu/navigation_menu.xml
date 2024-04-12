@@ -20,7 +20,7 @@
         android:icon="@drawable/menu_icon"
         android:title="@string/search_stock"/>
     <item
-        android:id="@+id/list_stock"
+        android:id="@+id/nav_list_stock"
         android:icon="@drawable/menu_icon"
         android:title="@string/list_stock"/>
     <item

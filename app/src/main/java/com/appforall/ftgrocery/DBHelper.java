@@ -129,6 +129,43 @@ public class DBHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
+    public Stock findStockByItemCode(String itemCode) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor;
+        String query = "SELECT * FROM " + STOCK_TABLE + " WHERE " + STOCK_PK_ITEM_CODE + " = ? ";
+        cursor = db.rawQuery(query, new String[]{itemCode});
+        if(cursor == null || cursor.getCount()<1){
+            return null;
+        }else{
+            cursor.moveToFirst();
+            Stock stock = new Stock(cursor.getString(1),cursor.getInt(2), cursor.getFloat(3),cursor.getInt(4)==1);
+            stock.setItemCode(cursor.getInt(0));
+            return stock;
+        }
+    }
+
+    public Boolean addSales(Sales sales) {
+        updateStock(sales.getItemCode(),sales.getQtySold());
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(SALES_ITEM_CODE, sales.getItemCode());
+        cv.put(SALES_DATE, sales.getDateOfSales().getTime());
+        cv.put(SALES_QTY_SOLD, sales.getQtySold());
+        cv.put(SALES_C_EMAIL, sales.getCustomerEmail());
+        cv.put(SALES_C_NAME, sales.getCustomerName());
+        long result = db.insert(SALES_TABLE, null, cv);
+        return result > 0;
+    }
+
+    private Boolean updateStock(Integer itemCode, Integer qtySold) {
+        Stock stock = findStockByItemCode(itemCode.toString());
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(STOCK_QTY, stock.getQtyStock()-qtySold);
+        int result = db.update(STOCK_TABLE,values,STOCK_PK_ITEM_CODE+"="+itemCode,null);
+        return result>0;
+    }
+
     /**
      * Delete Employee from Database Table
      *

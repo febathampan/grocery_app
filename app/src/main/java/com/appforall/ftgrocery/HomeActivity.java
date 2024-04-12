@@ -16,6 +16,8 @@ import com.appforall.ftgrocery.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.List;
+
 public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding homeBinding;
     ActionBarDrawerToggle mToggle;
@@ -85,6 +87,16 @@ public class HomeActivity extends AppCompatActivity {
                 int itemId = item.getItemId();
                 if (itemId == R.id.nav_add_stock) {
                     fragment = new AddStockFragment();
+                }else if (itemId == R.id.nav_sales) {
+                    fragment = new SalesFragment();
+                }else if (itemId == R.id.nav_purchase) {
+                   // fragment = ;
+                }else if (itemId == R.id.nav_search_stock) {
+                   // fragment = ;
+                }else if (itemId == R.id.nav_list_stock) {
+                   // fragment = ;
+                }else if (itemId == R.id.nav_log_out) {
+                   // fragment = ;
                 }
                 if (fragment != null) {
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

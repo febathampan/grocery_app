@@ -19,8 +19,16 @@
     <string name="qty_in_stock">Qty In Stock</string>
     <string name="price">Price</string>
     <string name="save">Save</string>
+    <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
     <string name="taxable">Taxable</string>
     <string name="non_taxable">Non Taxable</string>
     <string name="is_product_taxable">Is product taxable?</string>
+    <string name="item_code">Item Code</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="customer_email">Customer Email</string>
+    <string name="quantity_sold">Quantity Sold</string>
+    <string name="date_of_sales">Date of Sales</string>
+    <string name="quantity_purchased">Quantity Purchased</string>
+    <string name="date_of_purchase">Date of Purchase</string>
 </resources>

@@ -14,8 +14,7 @@ public class Sales {
     private Integer qtySold;
     private Date dateOfSales;
 
-    public Sales(Integer orderNumber, Integer itemCode, String customerName, String customerEmail, Integer qtySold, Date dateOfSales) {
-        this.orderNumber = orderNumber;
+    public Sales(Integer itemCode, String customerName, String customerEmail, Integer qtySold, Date dateOfSales) {
         this.itemCode = itemCode;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
