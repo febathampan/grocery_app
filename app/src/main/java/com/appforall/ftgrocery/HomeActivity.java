@@ -93,11 +93,17 @@ public class HomeActivity extends AppCompatActivity {
                 }else if (itemId == R.id.nav_purchase) {
                     fragment = new PurchaseFragment();
                 }else if (itemId == R.id.nav_search_stock) {
-                   // fragment = ;
+                    fragment = new SearchFragment();
                 }else if (itemId == R.id.nav_list_stock) {
                     fragment = new ListItemsFragment();
                 }else if (itemId == R.id.nav_log_out) {
-                   // fragment = ;
+                // Get SharedPreferences.Editor
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                // Clear all key-value pairs in the preference file
+                    editor.clear();
+                    editor.apply();
+                    finish();
                 }
                 if (fragment != null) {
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

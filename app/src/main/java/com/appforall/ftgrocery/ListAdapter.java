@@ -76,7 +76,6 @@ class ViewHolder extends RecyclerView.ViewHolder {
         recyclerRowBinding.txtItemCode.setText(String.valueOf(stock.getItemCode()));
         recyclerRowBinding.txtItemName.setText(stock.getItemName());
         recyclerRowBinding.txtPrice.setText(String.valueOf(stock.getPrice()));
-        recyclerRowBinding.txtTaxable.setText(stock.getTaxable()?"Yes":"No");
         recyclerRowBinding.txtQty.setText(String.valueOf(stock.getQtyStock()));
     }
 }

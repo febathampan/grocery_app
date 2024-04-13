@@ -52,12 +52,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
            else if (v.getId() == loginBinding.btnLogin.getId()) {
             if (validateLogin()) {
 
-                //To navigate to Home o successful login
+                //To navigate to Home on successful login
                 intentWelcome = new Intent(this, HomeActivity.class);
                 passDataUsingSharedPreferences();
                 startActivity(intentWelcome);
             } else {
-
                 //Using Material Alert Dialog
                 new MaterialAlertDialogBuilder(LoginActivity.this)
                         .setMessage("Invalid UserId or Password")

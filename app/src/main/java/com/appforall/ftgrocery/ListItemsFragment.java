@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListItemsFragment extends Fragment {
+public class ListItemsFragment extends Fragment implements View.OnClickListener {
     FragmentListItemsBinding listBinding;
 
     List<Stock> mList = new ArrayList<Stock>();
@@ -56,6 +57,7 @@ public class ListItemsFragment extends Fragment {
      * Initializes variables, binds to employeeList to display
      */
     private void init() {
+        listBinding.btnCancel.setOnClickListener(this);
         dbHelper = new DBHelper(getActivity());
         Cursor cursor = dbHelper.getAllStocks();
         if (cursor.getCount() < 1) {
@@ -63,7 +65,7 @@ public class ListItemsFragment extends Fragment {
         } else {
             cursor.moveToFirst();
             do {
-                Stock stock = new Stock(cursor.getString(1),cursor.getInt(2), cursor.getFloat(3),cursor.getInt(4)==1);
+                Stock stock = new Stock(cursor.getString(1), cursor.getInt(2), cursor.getFloat(3), cursor.getInt(4) == 1);
                 stock.setItemCode(cursor.getInt(0));
                 mList.add(stock);
             } while (cursor.moveToNext());
@@ -74,7 +76,7 @@ public class ListItemsFragment extends Fragment {
     }
 
     /**
-     * Binds employeeList
+     * Binds stocks list
      */
     private void bindAdapter() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -84,4 +86,19 @@ public class ListItemsFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == listBinding.btnCancel.getId()) {
+            goBackToHome();
+        }
+    }
+
+    /**
+     * Navigate back to home
+     */
+    private void goBackToHome() {
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        transaction.remove(ListItemsFragment.this);
+        transaction.commit();
+    }
 }

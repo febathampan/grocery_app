@@ -34,5 +34,6 @@ ActivityMainBinding mainBinding;
     private void launchLoginScreen() {
         intent1 = new Intent(this, LoginActivity.class);
         startActivity(intent1);
+        finish();//Logout
     }
 }

@@ -18,6 +18,17 @@ tools:context=".ListItemsFragment">
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold" />
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcView"

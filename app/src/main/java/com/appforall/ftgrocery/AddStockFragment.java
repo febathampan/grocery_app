@@ -19,9 +19,7 @@ import com.appforall.ftgrocery.databinding.FragmentAddStockBinding;
 public class AddStockFragment extends Fragment implements View.OnClickListener {
 
     FragmentAddStockBinding addStockBinding;
-
     DBHelper dbHelper;
-
     Boolean isInserted;
     Intent homeIntent;
 
