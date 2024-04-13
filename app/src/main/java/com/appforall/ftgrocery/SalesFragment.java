@@ -96,21 +96,21 @@ public class SalesFragment extends Fragment implements View.OnClickListener {
         }
         //Save Stock
         else if (v.getId() == salesBinding.btnSave.getId()) {
-            if(validateForm()){
+            if (validateForm()) {
                 Sales sales;
                 try {
-                  sales  = createSalesObj();
+                    sales = createSalesObj();
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
 
                 isInserted = dbHelper.addSales(sales);
-            if (isInserted) {
-                Toast.makeText(getActivity(), "Stock added successfully", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getActivity(), "Failed to add stock!", Toast.LENGTH_LONG).show();
+                if (isInserted) {
+                    Toast.makeText(getActivity(), "Stock added successfully", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), "Failed to add stock!", Toast.LENGTH_LONG).show();
+                }
             }
-        }
         }
 
         //Cancel and clear form
@@ -133,8 +133,11 @@ public class SalesFragment extends Fragment implements View.OnClickListener {
         transaction.commit();
     }
 
-
-
+    /**
+     * Validates fields
+     *
+     * @return
+     */
     private boolean validateForm() {
         boolean status = true;
         if (salesBinding.edtQty.getText().toString().trim().length() == 0 || Integer.parseInt(salesBinding.edtQty.getText().toString().trim()) < 1) {
@@ -144,20 +147,19 @@ public class SalesFragment extends Fragment implements View.OnClickListener {
         //Item Code
         String itemCode = salesBinding.edtItemCode.getText().toString().trim();
 
-        if (itemCode.length()==0) {
+        if (itemCode.length() == 0) {
             salesBinding.edtItemCode.setError("Invalid item code");
             status = false;
-        }else{
+        } else {
             //ItemCode present
             Stock stock = getStockDetails(itemCode);
-            if(stock == null){
+            if (stock == null) {
                 salesBinding.edtItemCode.setError("Item code not present");
                 status = false;
             }
-        //Sales Quantity
-            else  {
-                if(Integer.parseInt(salesBinding.edtQty.getText().toString().trim())>stock.getQtyStock())
-                {
+            //Sales Quantity
+            else {
+                if (Integer.parseInt(salesBinding.edtQty.getText().toString().trim()) > stock.getQtyStock()) {
                     salesBinding.edtQty.setError("Item under stock");
                     status = false;
                 }
@@ -172,6 +174,12 @@ public class SalesFragment extends Fragment implements View.OnClickListener {
         return status;
     }
 
+    /**
+     * Get Stock details from DB
+     *
+     * @param itemCode
+     * @return
+     */
     private Stock getStockDetails(String itemCode) {
         return dbHelper.findStockByItemCode(itemCode);
     }
@@ -188,8 +196,8 @@ public class SalesFragment extends Fragment implements View.OnClickListener {
                 salesBinding.edtCName.getText().toString().trim(),
                 salesBinding.edtCEmail.getText().toString().trim(),
                 Integer.parseInt(salesBinding.edtQty.getText().toString().trim()),
-               salesDate
-                );
+                salesDate
+        );
         return sales;
     }
 

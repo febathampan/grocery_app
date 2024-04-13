@@ -22,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     static final String STOCK_PRICE = "price";
     static final String STOCK_TAXABLE = "taxable";
     static final String SALES_TABLE = "Sales";
-    static final String SALES_PK_ORDER_NUMBER= "orderNumber";
+    static final String SALES_PK_ORDER_NUMBER = "orderNumber";
     static final String SALES_ITEM_CODE = "itemCode";
     static final String SALES_C_NAME = "customerName";
     static final String SALES_C_EMAIL = "customerEmail";
@@ -97,16 +97,16 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param password
      * @return null if user not found; user entity if user is present
      */
-    public User findUser(String userName, String password){
+    public User findUser(String userName, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor;
         String query = "SELECT * FROM " + USER_TABLE + " WHERE " + USER_UNAME + " = ? AND " + USER_PASSWORD + " = ?";
         cursor = db.rawQuery(query, new String[]{userName, password});
-        if(cursor == null || cursor.getCount()<1){
+        if (cursor == null || cursor.getCount() < 1) {
             return null;
-        }else{
+        } else {
             cursor.moveToFirst();
-            User user = new User(cursor.getString(2),cursor.getString(3), cursor.getString(1));
+            User user = new User(cursor.getString(2), cursor.getString(3), cursor.getString(1));
             user.setId(cursor.getInt(0));
             return user;
         }
@@ -114,6 +114,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     /**
      * Add a stock entity to table
+     *
      * @param stock
      * @return boolean - positive integer means saved, negative integer means failed to save.
      */
@@ -134,22 +135,30 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor;
         String query = "SELECT * FROM " + STOCK_TABLE + " WHERE " + STOCK_PK_ITEM_CODE + " = ? ";
         cursor = db.rawQuery(query, new String[]{itemCode});
-        if(cursor == null || cursor.getCount()<1){
+        if (cursor == null || cursor.getCount() < 1) {
             return null;
-        }else{
+        } else {
             cursor.moveToFirst();
-            Stock stock = new Stock(cursor.getString(1),cursor.getInt(2), cursor.getFloat(3),cursor.getInt(4)==1);
+            Stock stock = new Stock(cursor.getString(1), cursor.getInt(2), cursor.getFloat(3), cursor.getInt(4) == 1);
             stock.setItemCode(cursor.getInt(0));
             return stock;
         }
     }
 
+    /**
+     * Update stock and add sales to db
+     *
+     * @param sales
+     * @return
+     */
     public Boolean addSales(Sales sales) {
+        //Update stock
         Stock stock = findStockByItemCode(sales.getItemCode().toString());
         ContentValues values = new ContentValues();
-        values.put(STOCK_QTY, stock.getQtyStock()-sales.getQtySold());
+        values.put(STOCK_QTY, stock.getQtyStock() - sales.getQtySold());
         updateStock(stock.getItemCode(), values);
 
+        //Add Sales
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(SALES_ITEM_CODE, sales.getItemCode());
@@ -161,26 +170,33 @@ public class DBHelper extends SQLiteOpenHelper {
         return result > 0;
     }
 
-    private Boolean updateStock(Integer itemCode, Integer qtySold) {
-        Stock stock = findStockByItemCode(itemCode.toString());
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(STOCK_QTY, stock.getQtyStock()-qtySold);
-        int result = db.update(STOCK_TABLE,values,STOCK_PK_ITEM_CODE+"="+itemCode,null);
-        return result>0;
-    }
+    /**
+     * Updates Stock
+     *
+     * @param itemCode
+     * @param values   - ContentValues
+     * @return
+     */
     private Boolean updateStock(Integer itemCode, ContentValues values) {
         SQLiteDatabase db = this.getWritableDatabase();
-        int result = db.update(STOCK_TABLE,values,STOCK_PK_ITEM_CODE+"="+itemCode,null);
-        return result>0;
+        int result = db.update(STOCK_TABLE, values, STOCK_PK_ITEM_CODE + "=" + itemCode, null);
+        return result > 0;
     }
 
+    /**
+     * Update stock and add purchase to db
+     *
+     * @param purchase
+     * @return
+     */
     public Boolean addPurchase(Purchase purchase) {
+        //Update stock
         Stock stock = findStockByItemCode(purchase.getItemCode().toString());
         ContentValues values = new ContentValues();
-        values.put(STOCK_QTY, stock.getQtyStock()+ purchase.getQtyPurchased());
+        values.put(STOCK_QTY, stock.getQtyStock() + purchase.getQtyPurchased());
         updateStock(purchase.getItemCode(), values);
 
+        //Add Sales
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(PURCHASE_ITEM_CODE, purchase.getItemCode());
@@ -205,18 +221,4 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    /**
-     * Get all Employees from Database
-     *
-     * @return data
-     */
-   /* public Cursor readEmployees() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor;
-        cursor = db.rawQuery("select * from " + TABLE_NAME, null);
-        if (cursor.getCount() < 1) {
-            cursor.moveToFirst();
-        }
-        return cursor;
-    }*/
 }

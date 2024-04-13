@@ -25,6 +25,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         super();
         this.stocks = stocks;
     }
+
     /**
      * @param parent   The ViewGroup into which the new View will be added after it is bound to
      *                 an adapter position.
@@ -38,6 +39,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         recordLayoutBinding = RecordLayoutBinding.inflate(layoutInflater, parent, false);
         return new ViewHolder(recordLayoutBinding);
     }
+
     /**
      * @param holder   The ViewHolder which should be updated to represent the contents of the
      *                 item at the given position in the data set.
@@ -47,6 +49,7 @@ public class ListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder) holder).bindView(stocks.get(position));
     }
+
     @Override
     public int getItemCount() {
         return stocks.size();

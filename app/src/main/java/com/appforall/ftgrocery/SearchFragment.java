@@ -26,13 +26,21 @@ import java.text.ParseException;
 public class SearchFragment extends Fragment implements View.OnClickListener {
     FragmentSearchBinding searchBinding;
     DBHelper dbHelper;
-    Boolean isInserted;
 
     public SearchFragment() {
         // Required empty public constructor
     }
 
-
+    /**
+     * @param inflater           The LayoutInflater object that can be used to inflate
+     *                           any views in the fragment,
+     * @param container          If non-null, this is the parent view that the fragment's
+     *                           UI should be attached to.  The fragment should not add the view itself,
+     *                           but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     *                           from a previous saved state as given here.
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,6 +62,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    /**
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == searchBinding.btnSearch.getId()) {
@@ -79,7 +90,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 } else {
                     //Using Material Alert Dialog
                     new MaterialAlertDialogBuilder(getActivity())
-                            .setMessage("Item name:"+stock.getItemName()+"\nQty in stock: "+stock.getQtyStock()+ "\nPrice: "+stock.getPrice())
+                            .setMessage("Item name:" + stock.getItemName() + "\nQty in stock: " + stock.getQtyStock() + "\nPrice: " + stock.getPrice())
                             .setTitle("Stock Details")
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
@@ -105,6 +116,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    /**
+     * Validates form
+     *
+     * @return
+     */
     private boolean validateForm() {
         boolean status = true;
         //Item Code

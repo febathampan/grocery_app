@@ -21,7 +21,6 @@ public class AddStockFragment extends Fragment implements View.OnClickListener {
     FragmentAddStockBinding addStockBinding;
     DBHelper dbHelper;
     Boolean isInserted;
-    Intent homeIntent;
 
     public AddStockFragment() {
         // Required empty public constructor
@@ -83,6 +82,7 @@ public class AddStockFragment extends Fragment implements View.OnClickListener {
             goBackToHome();
         }
     }
+
     /**
      * Navigate back to home
      */

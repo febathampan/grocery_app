@@ -54,31 +54,12 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(homeBinding.materialToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setNavigationDrawer();
-       // SetBottomNavigation();
+        // SetBottomNavigation();
 
     }
 
     /**
-     * Set navigation bottom bar
-     */
-   /* private void SetBottomNavigation() {
-        homeBinding.bottomNavView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.nav_bottom_search) {
-
-                } else if (item.getItemId() == R.id.nav_bottom_profile) {
-
-                } else if (item.getItemId() == R.id.nav_bottom_account) {
-
-                }
-                return false;
-            }
-        });
-    }*/
-
-    /**
-     * Set navigation drawer for add, delete , list employees
+     * Set navigation drawer for add, delete , list ,search
      */
     private void setNavigationDrawer() {
         homeBinding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -88,19 +69,19 @@ public class HomeActivity extends AppCompatActivity {
                 int itemId = item.getItemId();
                 if (itemId == R.id.nav_add_stock) {
                     fragment = new AddStockFragment();
-                }else if (itemId == R.id.nav_sales) {
+                } else if (itemId == R.id.nav_sales) {
                     fragment = new SalesFragment();
-                }else if (itemId == R.id.nav_purchase) {
+                } else if (itemId == R.id.nav_purchase) {
                     fragment = new PurchaseFragment();
-                }else if (itemId == R.id.nav_search_stock) {
+                } else if (itemId == R.id.nav_search_stock) {
                     fragment = new SearchFragment();
-                }else if (itemId == R.id.nav_list_stock) {
+                } else if (itemId == R.id.nav_list_stock) {
                     fragment = new ListItemsFragment();
-                }else if (itemId == R.id.nav_log_out) {
-                // Get SharedPreferences.Editor
+                } else if (itemId == R.id.nav_log_out) {
+                    // Get SharedPreferences.Editor
                     SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                // Clear all key-value pairs in the preference file
+                    // Clear all key-value pairs in the preference file
                     editor.clear();
                     editor.apply();
                     finish();

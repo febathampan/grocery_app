@@ -44,17 +44,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         sharedPreferences1 = getSharedPreferences("login_details", Context.MODE_PRIVATE);
     }
 
+    /**
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == loginBinding.btnSignUp.getId()) {
             signUpUser();
-        }
-           else if (v.getId() == loginBinding.btnLogin.getId()) {
+        } else if (v.getId() == loginBinding.btnLogin.getId()) {
             if (validateLogin()) {
 
                 //To navigate to Home on successful login
                 intentWelcome = new Intent(this, HomeActivity.class);
                 passDataUsingSharedPreferences();
+
+                //Clear form
+                loginBinding.edtUserName.setText("");
+                loginBinding.edtPasswd.setText("");
+                loginBinding.edtEmailid.setText("");
+
                 startActivity(intentWelcome);
             } else {
                 //Using Material Alert Dialog
@@ -83,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * then insertion fails and dialog shows up
      */
     private void signUpUser() {
-        if(!addUser()) {
+        if (!addUser()) {
             new MaterialAlertDialogBuilder(LoginActivity.this)
                     .setMessage("Username already exists. All fields are required.")
                     .setTitle("Sign Up")
@@ -99,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // Toast.makeText(getActivity(), "Cancel Clicked!", Toast.LENGTH_LONG).show();
                         }
                     }).show();
-        }else{
+        } else {
             new MaterialAlertDialogBuilder(LoginActivity.this)
                     .setMessage("User registration successful")
                     .setTitle("Sign Up")
@@ -132,6 +140,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /**
      * Validate login
      * Checks if userName password combination is present in database
+     *
      * @return
      */
     private boolean validateLogin() {

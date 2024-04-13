@@ -24,10 +24,11 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PurchaseFragment extends Fragment implements View.OnClickListener{
+public class PurchaseFragment extends Fragment implements View.OnClickListener {
     public PurchaseFragment() {
         // Required empty public constructor
     }
+
     FragmentPurchaseBinding purchaseBinding;
     DBHelper dbHelper;
     Boolean isInserted;
@@ -94,10 +95,10 @@ public class PurchaseFragment extends Fragment implements View.OnClickListener{
         }
         //Save Purchase
         else if (v.getId() == purchaseBinding.btnSubmit.getId()) {
-            if(validateForm()){
+            if (validateForm()) {
                 Purchase purchase;
                 try {
-                    purchase  = createPurchaseObj();
+                    purchase = createPurchaseObj();
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
@@ -129,7 +130,11 @@ public class PurchaseFragment extends Fragment implements View.OnClickListener{
     }
 
 
-
+    /**
+     * Validates form
+     *
+     * @return
+     */
     private boolean validateForm() {
         boolean status = true;
         if (purchaseBinding.edtQty.getText().toString().trim().length() == 0 || Integer.parseInt(purchaseBinding.edtQty.getText().toString().trim()) < 1) {
@@ -139,13 +144,13 @@ public class PurchaseFragment extends Fragment implements View.OnClickListener{
         //Item Code
         String itemCode = purchaseBinding.edtItemCode.getText().toString().trim();
 
-        if (itemCode.length()==0) {
+        if (itemCode.length() == 0) {
             purchaseBinding.edtItemCode.setError("Invalid item code");
             status = false;
-        }else{
-            //ItemCode present
+        } else {
+            //ItemCode not empty
             Stock stock = getStockDetails(itemCode);
-            if(stock == null){
+            if (stock == null) {
                 purchaseBinding.edtItemCode.setError("Item code not present");
                 status = false;
             }
@@ -159,6 +164,12 @@ public class PurchaseFragment extends Fragment implements View.OnClickListener{
         return status;
     }
 
+    /**
+     * Get Stock Details from DB
+     *
+     * @param itemCode
+     * @return Stock
+     */
     private Stock getStockDetails(String itemCode) {
         return dbHelper.findStockByItemCode(itemCode);
     }
@@ -171,7 +182,7 @@ public class PurchaseFragment extends Fragment implements View.OnClickListener{
     private Purchase createPurchaseObj() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date purchaseDate = dateFormat.parse(purchaseBinding.edtPurchaseDate.getText().toString());
-       return new Purchase(Integer.parseInt(purchaseBinding.edtItemCode.getText().toString().trim()),
+        return new Purchase(Integer.parseInt(purchaseBinding.edtItemCode.getText().toString().trim()),
                 Integer.parseInt(purchaseBinding.edtQty.getText().toString().trim()),
                 purchaseDate);
     }

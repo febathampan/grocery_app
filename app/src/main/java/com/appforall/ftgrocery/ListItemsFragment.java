@@ -23,7 +23,6 @@ import java.util.List;
  */
 public class ListItemsFragment extends Fragment implements View.OnClickListener {
     FragmentListItemsBinding listBinding;
-
     List<Stock> mList = new ArrayList<Stock>();
     DBHelper dbHelper;
     ListAdapter mAdapter;
@@ -86,6 +85,9 @@ public class ListItemsFragment extends Fragment implements View.OnClickListener 
         mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == listBinding.btnCancel.getId()) {
